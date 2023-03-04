@@ -6,3 +6,8 @@ const {v4: uuid} = require('uuid');
 
 // Create a new Express application instance
 const app = express();
+
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static('public'));
