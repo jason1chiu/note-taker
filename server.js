@@ -12,6 +12,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
+// HTML Routes
+app.get('/notes', (req, res) => {
+ res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+
+app.get('/', (req, res) => {
+ res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // Define the port number to listen on for incoming requests, either from an environment variable or 3001 if not set
 const PORT = process.env.PORT || 3001;
 // Start the server and listen for incoming requests on the specified port
