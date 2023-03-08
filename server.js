@@ -28,9 +28,22 @@ app.get('/api/notes', (req, res) => {
   res.json(notes);
 });
 
+app.post('/api/notes', (req, res) => {
+  const notes = readNotesFromFile();
+  const newNote = req.body;
+  newNote.id = uuid();
+  notes.push(newNote);
+  writeNotesToFile(notes);
+  res.json(newNote);
+});
+
 function readNotesFromFile() {
   const data = fs.readFileSync(dbFilePath, 'utf8');
   return JSON.parse(data);
+}
+
+function writeNotesToFile(notes) {
+  fs.writeFileSync(dbFilePath, JSON.stringify(notes));
 }
 
 // Define the port number to listen on for incoming requests, either from an environment variable or 3001 if not set
